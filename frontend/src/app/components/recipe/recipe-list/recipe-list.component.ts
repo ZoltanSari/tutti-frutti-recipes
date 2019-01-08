@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import {Recipe} from "../../../model/recipe.model";
+import {Ingredient} from "../../../model/ingredient.model";
 
 @Component({
   selector: 'app-recipe-list',
@@ -7,9 +9,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class RecipeListComponent implements OnInit {
 
+  recipes: Recipe[];
+
   constructor() { }
 
   ngOnInit() {
+    this.recipes = [new Recipe('Hús',
+      'Finom',
+      [new Ingredient('Liszt', 1, 'kg')])]
   }
 
 }
