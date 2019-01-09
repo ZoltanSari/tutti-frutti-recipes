@@ -1,24 +1,16 @@
 package com.codecool.tuttifrutti;
 
+import com.codecool.tuttifrutti.model.Ingredient;
 import com.codecool.tuttifrutti.model.Recipe;
 import com.codecool.tuttifrutti.model.User;
 import com.codecool.tuttifrutti.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.context.annotation.Bean;
-import org.springframework.web.cors.CorsConfiguration;
-import org.springframework.web.cors.CorsConfigurationSource;
-import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
-import org.springframework.web.servlet.config.annotation.CorsRegistry;
-import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
-import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 
 import javax.annotation.PostConstruct;
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
 
 @SpringBootApplication
 public class TuttiFruttiApplication {
@@ -44,8 +36,8 @@ public class TuttiFruttiApplication {
                 .imageUrl("asdasdasd")
                 .preparation("it is very difficult")
                 .user(user1)
-                .ingredient("Chicken")
-                .ingredient("Greens")
+                .ingredient(new Ingredient("Chicken", 2, "kg"))
+                .ingredient(new Ingredient("Greens", 5, "kg"))
                 .build();
 
         Recipe recipe2 = Recipe.builder()
@@ -54,8 +46,8 @@ public class TuttiFruttiApplication {
                 .imageUrl("dsadsadsa")
                 .preparation("it is so easy")
                 .user(user1)
-                .ingredient("Beef")
-                .ingredient("Buns")
+                .ingredient(new Ingredient("Beef", 6, "pound"))
+                .ingredient(new Ingredient("Buns", 3, "piece"))
                 .build();
 
         user1.addNewRecipe(recipe1);
