@@ -39,14 +39,13 @@ public class Recipe {
     @Column(nullable = false, name = "total_likes")
     private int totalLikes = 0;
 
-    @ElementCollection
-    @CollectionTable(name="ingredients")
+    @OneToMany(mappedBy = "recipe", cascade = CascadeType.ALL)
     @Column(nullable = false, name = "ingredient")
-    @LazyCollection(LazyCollectionOption.FALSE)
+    @LazyCollection(LazyCollectionOption.TRUE)
     @Singular
-    private Collection<String> ingredients = new ArrayList<>();
+    private Collection<Ingredient> ingredients = new ArrayList<>();
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @JsonBackReference
     private User user;
 
@@ -55,7 +54,7 @@ public class Recipe {
                   String preparation,
                   String imageUrl,
                   String difficulty,
-                  Collection<String> ingredients,
+                  Collection<Ingredient> ingredients,
                   User user) {
         this.name = name;
         this.preparation = preparation;
@@ -65,7 +64,7 @@ public class Recipe {
         this.user = user;
     }
 
-    public void addIngredient(String ingredient) {
+    public void addIngredient(Ingredient ingredient) {
         this.ingredients = new ArrayList<>(this.ingredients);
         this.ingredients.add(ingredient);
     }
