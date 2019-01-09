@@ -1,3 +1,9 @@
-<p>
-  recipe-list works!
-</p>
+<div class="contanier">
+  <div class="row">
+    <div *ngFor="let recipe of recipes">
+      {{ recipe.name }}
+      {{ recipe.description }}
+      {{ recipe.ingredients[0].name }}
+    </div>
+  </div>
+</div>
