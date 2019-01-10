@@ -36,7 +36,6 @@ public class User {
     @OneToMany(mappedBy = "user", cascade = { CascadeType.PERSIST, CascadeType.REMOVE, CascadeType.MERGE })
     @LazyCollection(LazyCollectionOption.TRUE)
     @ToString.Exclude
-//    @Singular
     @JsonManagedReference
     private Collection<Recipe> recipes = new ArrayList<>();
 
@@ -46,10 +45,9 @@ public class User {
             inverseJoinColumns = @JoinColumn(name = "recipe_id"))
     @ToString.Exclude
     @JsonManagedReference
-//    @Singular
     private Collection<Recipe> likedRecipes = new ArrayList<>();
 
-//    @Builder
+
     public User(String username,
                 String password,
                 LocalDate registrationDate,
@@ -76,13 +74,10 @@ public class User {
                         .collect(Collectors.toList()))
                 .user(this)
                 .build();
-//        this.recipes = new ArrayList<>(this.recipes);
         this.recipes.add(newRecipe);
-//        newRecipe.setUser(this);
     }
 
     public void addNewRecipe(Recipe recipe) {
-//        this.recipes = new ArrayList<>(this.recipes);
         this.recipes.add(recipe);
         recipe.setUser(this);
     }
