@@ -1,6 +1,7 @@
 package com.codecool.tuttifrutti.model;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.*;
 import org.hibernate.annotations.LazyCollection;
 import org.hibernate.annotations.LazyCollectionOption;
@@ -44,26 +45,13 @@ public class Recipe {
     @LazyCollection(LazyCollectionOption.TRUE)
     @Singular
     @ToString.Exclude
+    @JsonManagedReference
     private Collection<Ingredient> ingredients = new ArrayList<>();
 
     @ManyToOne(cascade = CascadeType.ALL)
     @JsonBackReference
     private User user;
 
-//    @Builder
-    public Recipe(String name,
-                  String preparation,
-                  String imageUrl,
-                  String difficulty,
-                  Collection<Ingredient> ingredients,
-                  User user) {
-        this.name = name;
-        this.preparation = preparation;
-        this.imageUrl = imageUrl;
-        this.difficulty = difficulty;
-        this.ingredients = ingredients;
-        this.user = user;
-    }
 
     public void addIngredient(Ingredient ingredient) {
         this.ingredients = new ArrayList<>(this.ingredients);

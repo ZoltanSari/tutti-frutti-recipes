@@ -1,5 +1,6 @@
 package com.codecool.tuttifrutti.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -27,6 +28,7 @@ public class Ingredient {
     private String unit;
 
     @ManyToOne
+    @JsonBackReference
     private Recipe recipe;
 
 
