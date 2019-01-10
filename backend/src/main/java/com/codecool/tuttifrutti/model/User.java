@@ -10,6 +10,7 @@ import javax.persistence.*;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.stream.Collectors;
 
 @Entity
 @Data
@@ -67,7 +68,12 @@ public class User {
                 .preparation(recipeDTO.getPreparation())
                 .imageUrl(recipeDTO.getImageUrl())
                 .difficulty(recipeDTO.getDifficulty())
-                .ingredients(recipeDTO.getIngredients())
+                .ingredients(recipeDTO.getIngredients()
+                        .stream()
+                        .map(ingredientDTO -> new Ingredient(ingredientDTO.getName(),
+                                ingredientDTO.getAmount(),
+                                ingredientDTO.getUnit()))
+                        .collect(Collectors.toList()))
                 .user(this)
                 .build();
 //        this.recipes = new ArrayList<>(this.recipes);
