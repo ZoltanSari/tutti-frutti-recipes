@@ -1,6 +1,5 @@
 package com.codecool.tuttifrutti.dto;
 
-import com.codecool.tuttifrutti.model.Ingredient;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -17,6 +16,6 @@ public class RecipeDTO {
     private String preparation;
     private String imageUrl;
     private String difficulty;
-    private Collection<Ingredient> ingredients = new ArrayList<>();
+    private Collection<IngredientDTO> ingredients = new ArrayList<>();
 
 }

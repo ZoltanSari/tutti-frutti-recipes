@@ -43,6 +43,7 @@ public class Recipe {
     @Column(nullable = false, name = "ingredient")
     @LazyCollection(LazyCollectionOption.TRUE)
     @Singular
+    @ToString.Exclude
     private Collection<Ingredient> ingredients = new ArrayList<>();
 
     @ManyToOne(cascade = CascadeType.ALL)

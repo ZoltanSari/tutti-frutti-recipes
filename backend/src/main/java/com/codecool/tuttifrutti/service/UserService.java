@@ -2,6 +2,7 @@ package com.codecool.tuttifrutti.service;
 
 import com.codecool.tuttifrutti.dto.RecipeDTO;
 import com.codecool.tuttifrutti.dto.UserDTO;
+import com.codecool.tuttifrutti.model.Ingredient;
 import com.codecool.tuttifrutti.model.Recipe;
 import com.codecool.tuttifrutti.model.User;
 import com.codecool.tuttifrutti.repository.RecipeRepository;
@@ -9,7 +10,10 @@ import com.codecool.tuttifrutti.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class UserService {
@@ -48,9 +52,24 @@ public class UserService {
                     .preparation(recipeDTO.getPreparation())
                     .imageUrl(recipeDTO.getImageUrl())
                     .difficulty(recipeDTO.getDifficulty())
-                    .ingredients(recipeDTO.getIngredients())
+                    .ingredients(recipeDTO.getIngredients()
+                            .stream()
+                            .map(ingredientDTO -> new Ingredient(ingredientDTO.getName(),
+                                    ingredientDTO.getAmount(),
+                                    ingredientDTO.getUnit()))
+                            .collect(Collectors.toList()))
                     .user(userObject)
                     .build();
+
+            List<Ingredient> newIngredients = new ArrayList<>();
+            recipeDTO.getIngredients()
+                    .forEach(ingredientDTO -> newIngredients.add(
+                            new Ingredient(ingredientDTO.getName(),
+                                    ingredientDTO.getAmount(),
+                                    ingredientDTO.getUnit(),
+                                    newRecipe)));
+            newRecipe.setIngredients(newIngredients);
+
             userObject.getRecipes().add(newRecipe);
             newRecipe.setUser(userObject);
 //            userObject.addNewRecipe(recipeDTO);
