@@ -1,9 +1,15 @@
-<div class="contanier">
-  <div class="row">
-    <div *ngFor="let recipe of recipes">
-      {{ recipe.name }}
-      {{ recipe.description }}
-      {{ recipe.ingredients[0].name }}
-    </div>
+<div class="row">
+  <div class="col-xs-12">
+    <button class="btn btn-success"
+            (click)="onNewRecipe()">New Recipe
+    </button>
   </div>
+</div>
+<hr>
+<div class="row">
+  <app-recipe-item *ngFor="let recipe of recipes;"
+                   [recipe]="recipe"
+                   [id]="recipe.id"
+                   [user]="user">
+  </app-recipe-item>
 </div>
