@@ -1,3 +1,24 @@
-<p>
-  recipe-details works!
-</p>
+<div class="row">
+  <div class="col-xs-6">
+    <img [src]="recipe.imageUrl" class="img-responsive" style="max-height: 400px; max-width: 500px">
+    <h3>How to make</h3>
+    {{ recipe.preparation }}
+  </div>
+  <div class="col-xs-6">
+    <div class="text-center">
+      <h1>{{ recipe.name }}</h1>
+    </div>
+    <div class="row">
+      <div class="col-xs-12">
+        <h3>Ingredients:</h3>
+        <ul class="list-group">
+          <li class="list-group-item"
+              *ngFor="let ingredient of recipe.ingredients">
+            {{ ingredient.amount }} {{ ingredient.unit }} {{ ingredient.name }}
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <div></div>
+</div>
