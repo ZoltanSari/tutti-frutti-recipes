@@ -15,7 +15,7 @@
       <app-recipe-item *ngFor="let recipe of searchRecipe.slice(4 * i, 4 * i + 4);"
                        [recipe]="recipe"
                        [id]="recipe.id"
-                       [isUser]="authService.isUser"
+                       [isLoggedIn]="isLoggedIn"
                        class="col-3 p-2">
       </app-recipe-item>
     </div>

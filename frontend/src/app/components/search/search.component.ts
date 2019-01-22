@@ -14,6 +14,7 @@ export class SearchComponent implements OnInit {
 
   @ViewChild('dropdown') dropdownElement: ElementRef;
   searchRecipe: Recipe[];
+  isLoggedIn: boolean;
 
   constructor(private recipeService: RecipeService,
               private authService: AuthService,
@@ -23,6 +24,9 @@ export class SearchComponent implements OnInit {
 
     this.recipeService.searchResultRecipe.subscribe(
       recipe => this.searchRecipe = recipe
+    )
+    this.authService.isLoggedIn.subscribe(
+      isLoggedIn => this.isLoggedIn = isLoggedIn
     )
   }
 

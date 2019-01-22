@@ -15,6 +15,7 @@ export class RecipeListComponent implements OnInit {
   @ViewChild('dropdown') dropdownElement: ElementRef;
   recipes: Recipe[];
   searchResultRecipes: Recipe[];
+  isLoggedIn: boolean;
 
 
   constructor(private recipeService: RecipeService,
@@ -29,6 +30,9 @@ export class RecipeListComponent implements OnInit {
     );
     this.recipeService.searchResultRecipe.subscribe(
       recipes => this.searchResultRecipes = recipes
+    )
+    this.authService.isLoggedIn.subscribe(
+      isLoggedIn => {this.isLoggedIn = isLoggedIn}
     )
   }
 

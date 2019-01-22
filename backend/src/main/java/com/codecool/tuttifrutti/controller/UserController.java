@@ -18,29 +18,29 @@ public class UserController {
     private UserService userService;
 
 
-    @GetMapping("/{user_id}")
-    public User getUser(@PathVariable long user_id) {
-        return this.userService.getUser(user_id);
+    @GetMapping("/{username}")
+    public User getUser(@PathVariable String username) {
+        return this.userService.getUser(username);
     }
 
-    @PutMapping("/{user_id}/liked-recipes/recipes/{recipe_id}")
-    public void likeRecipe(@PathVariable long user_id, @PathVariable long recipe_id) {
-        this.userService.likeRecipe(user_id, recipe_id);
+    @PutMapping("/{username}/liked-recipes/recipes/{recipe_id}")
+    public void likeRecipe(@PathVariable String username, @PathVariable long recipe_id) {
+        this.userService.likeRecipe(username, recipe_id);
     }
 
-    @PostMapping("/{user_id}/add-recipe")
-    public void addUsersRecipe(@PathVariable long user_id, @RequestBody RecipeDTO recipeDTO) {
-        this.userService.addUsersRecipe(user_id, recipeDTO);
+    @PostMapping("/{username}/add-recipe")
+    public void addUsersRecipe(@PathVariable String username, @RequestBody RecipeDTO recipeDTO) {
+        this.userService.addUsersRecipe(username, recipeDTO);
     }
 
-    @PutMapping("/{user_id}/recipes/{recipe_id}")
-    public void editUsersRecipe(@PathVariable long user_id, @PathVariable long recipe_id, @RequestBody Recipe recipe) {
-        this.userService.editUsersRecipe(user_id, recipe_id, recipe);
+    @PutMapping("/{username}/recipes/{recipe_id}")
+    public void editUsersRecipe(@PathVariable String username, @PathVariable long recipe_id, @RequestBody Recipe recipe) {
+        this.userService.editUsersRecipe(username, recipe_id, recipe);
     }
 
-    @DeleteMapping("/{user_id}/recipes/{recipe_id}")
-    public void deleteUsersRecipe(@PathVariable long user_id, @PathVariable long recipe_id) {
-        this.userService.deleteUsersRecipe(user_id, recipe_id);
+    @DeleteMapping("/{username}/recipes/{recipe_id}")
+    public void deleteUsersRecipe(@PathVariable String username, @PathVariable long recipe_id) {
+        this.userService.deleteUsersRecipe(username, recipe_id);
     }
 
     @PostMapping("/registration")

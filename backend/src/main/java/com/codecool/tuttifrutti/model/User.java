@@ -60,23 +60,6 @@ public class User {
         this.likedRecipes = likedRecipes;
     }
 
-    public void addNewRecipe(RecipeDTO recipeDTO) {
-        Recipe newRecipe = Recipe.builder()
-                .name(recipeDTO.getName())
-                .preparation(recipeDTO.getPreparation())
-                .imageUrl(recipeDTO.getImageUrl())
-                .difficulty(recipeDTO.getDifficulty())
-                .ingredients(recipeDTO.getIngredients()
-                        .stream()
-                        .map(ingredientDTO -> new Ingredient(ingredientDTO.getName(),
-                                ingredientDTO.getAmount(),
-                                ingredientDTO.getUnit()))
-                        .collect(Collectors.toList()))
-                .user(this)
-                .build();
-        this.recipes.add(newRecipe);
-    }
-
     public void addNewRecipe(Recipe recipe) {
         this.recipes.add(recipe);
         recipe.setUser(this);

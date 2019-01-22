@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { AuthService } from '../../../services/auth.service';
+import { UserService } from '../../../services/user.service';
 
 @Component({
   selector: 'app-logout',
@@ -10,7 +10,7 @@ import { AuthService } from '../../../services/auth.service';
 export class RegisterComponent implements OnInit {
   registerForm: FormGroup;
 
-  constructor(private authService: AuthService) { }
+  constructor(private userService: UserService) { }
 
   ngOnInit() {
     this.initForm()
@@ -26,7 +26,7 @@ export class RegisterComponent implements OnInit {
       'recipes': [],
       'likedRecipes': []
     };
-    this.authService.registerUser(userDetails);
+    this.userService.register(userDetails);
   }
 
   initForm() {

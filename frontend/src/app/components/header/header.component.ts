@@ -11,7 +11,7 @@ import { RecipeService } from '../../services/recipe.service';
 })
 export class HeaderComponent implements OnInit {
 
-  userLoggedIn: boolean = true;
+  userLoggedIn: boolean = false;
 
   constructor(private authService: AuthService,
               private recipeService: RecipeService,
