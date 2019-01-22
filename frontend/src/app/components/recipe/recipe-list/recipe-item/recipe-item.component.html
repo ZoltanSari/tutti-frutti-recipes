@@ -1,15 +1,13 @@
 <div>
-  <a [routerLink]="'/' + recipe.id">
-    <img src="{{ recipe.imageUrl }}"
+  <a [routerLink]="['/', recipe.id]">
+    <img [src]="recipe.imageUrl"
          alt="{{ recipe.name }}"
-         class="responsive"
-         style="height: 170px">
+         class="responsive picture">
   </a>
   <div>
     <h3>{{ recipe.name }}</h3>
     <p>{{ recipe.preparation }}</p>
     <button type="button" (click)="addLike()" *ngIf="isUser">Like: {{ recipe.totalLikes }}</button>
     <div>Total like: {{ recipe.totalLikes }}</div>
-    <hr>
   </div>
 </div>

@@ -1,5 +1,29 @@
-<app-recipe-item *ngFor="let recipe of searchRecipe;"
-                 [recipe]="recipe"
-                 [id]="recipe.id"
-                 [isUser]="authService.isUser"></app-recipe-item>
-
+<div class="row">
+  <div class="col-9">
+    <div class="col-4 d-flex">
+      <div class="dropdown">
+        <button class="btn btn-primary mt-3" (click)="onDropdownMenu()">Menu</button>
+        <ul class="dropdown-menu" #dropdown>
+          <a class="dropdown-item">My Recipes</a>
+          <a class="dropdown-item">My Favourites</a>
+          <a class="dropdown-item" routerLink="/add-recipe">Add Recipe</a>
+        </ul>
+      </div>
+      <input #search class="form-control m-3" type="text" (keyup.enter)="onEnter(search.value)">
+    </div>
+    <div *ngFor="let t of searchRecipe; let i = index" class="row p-5">
+      <app-recipe-item *ngFor="let recipe of searchRecipe.slice(4 * i, 4 * i + 4);"
+                       [recipe]="recipe"
+                       [id]="recipe.id"
+                       [isUser]="authService.isUser"
+                       class="col-3 p-2">
+      </app-recipe-item>
+    </div>
+  </div>
+  <div class="col-3 pt-5">
+    <app-recipe-item *ngFor="let currentRecipe of searchRecipe"
+                     [recipe]="currentRecipe"
+                     [id]="currentRecipe.id">
+    </app-recipe-item>
+  </div>
+</div>

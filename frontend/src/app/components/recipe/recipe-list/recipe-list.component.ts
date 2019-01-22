@@ -37,10 +37,9 @@ export class RecipeListComponent implements OnInit {
     this.router.navigate(['user', 'new']);
   }
 
-  onEnter(value: string){
+  onEnter(value: string) {
     this.recipeService.getSearchRecipe(value);
     this.router.navigate(['search']);
-
   }
 
   onDropdownMenu() {
