@@ -22,6 +22,7 @@ import { UserService } from './services/user.service';
 import { RecipeService } from './services/recipe.service';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { ErrorPageComponent } from './error-page/error-page.component';
+import { AuthComponent } from './components/auth/auth.component';
 
 @NgModule({
   declarations: [
@@ -39,7 +40,8 @@ import { ErrorPageComponent } from './error-page/error-page.component';
     AddNewRecipeComponent,
     RegisterComponent,
     PageNotFoundComponent,
-    ErrorPageComponent
+    ErrorPageComponent,
+    AuthComponent
   ],
   imports: [
     BrowserModule,

@@ -1,4 +1,4 @@
-<div class="row">
+<div class="col-12">
   <h3>Register</h3>
   <form [formGroup]="registerForm" (ngSubmit)="onRegister()">
     <div class="form-group">
@@ -8,6 +8,10 @@
     <div class="form-group">
       <label for="registerPassword">Password</label>
       <input type="password" id="registerPassword" class="form-control" formControlName="registerPassword">
+    </div>
+    <div class="form-group">
+      <label for="registerConfirmPassword">Confirm Password</label>
+      <input type="password" id="registerConfirmPassword" class="form-control" formControlName="registerConfirmPassword">
     </div>
     <button type="submit" class="btn btn-primary" [disabled]="!registerForm.valid">Submit</button>
   </form>

@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
-import {Recipe} from "../../../model/recipe.model";
-import {RecipeService} from "../../../services/recipe.service";
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
+
+import { Recipe } from "../../../model/recipe.model";
+import { RecipeService } from "../../../services/recipe.service";
 import { AuthService } from '../../../services/auth.service';
 
 @Component({
@@ -11,6 +12,7 @@ import { AuthService } from '../../../services/auth.service';
 })
 export class RecipeListComponent implements OnInit {
 
+  @ViewChild('dropdown') dropdownElement: ElementRef;
   recipes: Recipe[];
   searchResultRecipes: Recipe[];
 
@@ -34,4 +36,15 @@ export class RecipeListComponent implements OnInit {
   onNewRecipe() {
     this.router.navigate(['user', 'new']);
   }
+
+  onEnter(value: string){
+    this.recipeService.getSearchRecipe(value);
+    this.router.navigate(['search']);
+
+  }
+
+  onDropdownMenu() {
+    (<HTMLElement>this.dropdownElement.nativeElement).classList.toggle('d-block');
+  }
+
 }
