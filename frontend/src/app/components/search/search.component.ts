@@ -11,6 +11,7 @@ import { AuthService } from '../../services/auth.service';
 export class SearchComponent implements OnInit {
 
   searchRecipe: Recipe[];
+  isLoggedIn: boolean;
 
   constructor(private recipeService: RecipeService,
               private authService: AuthService) { }
@@ -19,6 +20,9 @@ export class SearchComponent implements OnInit {
 
     this.recipeService.searchResultRecipe.subscribe(
       recipe => this.searchRecipe = recipe
+    )
+    this.authService.isLoggedIn.subscribe(
+      isLoggedIn => this.isLoggedIn = isLoggedIn
     )
   }
 }

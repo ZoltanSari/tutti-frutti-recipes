@@ -14,7 +14,7 @@ export class UserRecipeListComponent implements OnInit {
   ngOnInit() {
   }
 
-  onDelete(userId: number, recipeId: number) {
-    this.userService.deleteUsersRecipe(userId, recipeId);
+  onDelete(username: string, recipeId: number) {
+    this.userService.deleteUsersRecipe(username, recipeId);
   }
 }

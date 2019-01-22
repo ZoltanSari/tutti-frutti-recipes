@@ -1,5 +1,5 @@
 <app-recipe-item *ngFor="let recipe of searchRecipe;"
                  [recipe]="recipe"
                  [id]="recipe.id"
-                 [isUser]="authService.isUser"></app-recipe-item>
+                 [isLoggedIn]="isLoggedIn"></app-recipe-item>
 

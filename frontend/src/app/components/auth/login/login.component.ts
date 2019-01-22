@@ -24,7 +24,8 @@ export class LoginComponent implements OnInit {
   onLogin() {
     const username = this.loginForm.value['username'];
     const password = this.loginForm.value['password'];
-    this.authService.isLogin(username, password)
+    this.userService.login(username, password);
+
   }
 
   private initForm() {

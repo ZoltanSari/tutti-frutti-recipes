@@ -16,8 +16,8 @@ export class UserFavouriteRecipeComponent implements OnInit {
     this.userFavourites = this.userService.user.likedRecipes;
   }
 
-  onDelete(userId: number, recipeId: number) {
-    this.userService.deleteUsersRecipe(userId, recipeId);
+  onDelete(username: string, recipeId: number) {
+    this.userService.deleteUsersRecipe(username, recipeId);
   }
 
 }
