@@ -1,10 +1,15 @@
-import { UserService } from './user.service';
-import { Recipe } from '../model/recipe.model';
 import { Router } from '@angular/router';
 import { Injectable } from '@angular/core';
 
+import { Subject } from 'rxjs';
+
+import { UserService } from './user.service';
+import { Recipe } from '../model/recipe.model';
+
 @Injectable()
 export class AuthService {
+
+  isLoggedIn = new Subject<boolean>();
   isUser = false;
 
   constructor(private userService: UserService,
@@ -41,4 +46,5 @@ export class AuthService {
   logOutUser() {
     this.isUser = false
   }
+
 }

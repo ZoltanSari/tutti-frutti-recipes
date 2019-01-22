@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+
 import { AuthService } from '../../services/auth.service';
 import { RecipeService } from '../../services/recipe.service';
-import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-header',
@@ -10,20 +11,20 @@ import { Router } from '@angular/router';
 })
 export class HeaderComponent implements OnInit {
 
+  userLoggedIn: boolean = true;
+
   constructor(private authService: AuthService,
               private recipeService: RecipeService,
               private router: Router) { }
 
   ngOnInit() {
+    // this.userLoggedIn = this.authService.isLoggedIn.subscribe(
+    //   state => this.userLoggedIn = state
+    // );
   }
 
   onLogout() {
     this.authService.logOutUser();
   }
 
-  onEnter(value: string){
-    this.recipeService.getSearchRecipe(value);
-    this.router.navigate(['search']);
-
-  }
 }
