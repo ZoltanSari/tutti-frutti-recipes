@@ -115,7 +115,7 @@ public class UserService {
 
     public User login(String username, String password) {
         User user = this.userRepository.findByUsername(username);
-
+        System.out.println(user != null && user.getPassword().equals(password));
         if (user != null && user.getPassword().equals(password)) return user;
 
         return null;

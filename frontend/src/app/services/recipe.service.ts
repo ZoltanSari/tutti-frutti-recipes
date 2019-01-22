@@ -1,15 +1,34 @@
-import {Injectable} from "@angular/core";
-import {Subject} from "rxjs";
+import { Injectable } from '@angular/core';
+import {Recipe} from "../model/recipe.model";
+import { HttpClient } from '@angular/common/http';
+import { Subject } from 'rxjs';
+import { Router } from '@angular/router';
 
-@Injectable({
-  providedIn: 'root'
-})
-export class RecipeService {
+@Injectable()
+export class RecipeService{
+  baseRecipeUrl: string = "http://localhost:8080/recipes";
+  searchResultRecipe = new Subject<Recipe[]>();
 
-  message = new Subject<string>();
+  constructor(private http: HttpClient,
+              private router: Router){}
 
-  sendmessage(message: string){
-    this.message.next(message);
+  getRecipe(id: number) {
+    return this.http.get<Recipe>(`${this.baseRecipeUrl}/${id}`);
   }
 
+  getTop5RecipeMostLikeRecipes() {
+    return this.http.get<Recipe[]>(`${this.baseRecipeUrl}/top-5`)
+  }
+
+  getAllRecipes() {
+    return this.http.get<Recipe[]>(`${this.baseRecipeUrl}`)
+
+  }
+
+  getSearchRecipe(substring: string) {
+    return this.http.get<Recipe[]>(`${this.baseRecipeUrl}/search?substring=${substring}`)
+      .subscribe(
+        (recipes: Recipe[]) => this.searchResultRecipe.next(recipes)
+      );
+  }
 }

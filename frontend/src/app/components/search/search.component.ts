@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { RecipeService } from '../../services/recipe.service';
+import { Recipe } from '../../model/recipe.model';
+import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'app-search',
@@ -7,9 +10,15 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SearchComponent implements OnInit {
 
-  constructor() { }
+  searchRecipe: Recipe[];
+
+  constructor(private recipeService: RecipeService,
+              private authService: AuthService) { }
 
   ngOnInit() {
-  }
 
+    this.recipeService.searchResultRecipe.subscribe(
+      recipe => this.searchRecipe = recipe
+    )
+  }
 }
