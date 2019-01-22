@@ -8,8 +8,10 @@ import com.codecool.tuttifrutti.model.User;
 import com.codecool.tuttifrutti.repository.RecipeRepository;
 import com.codecool.tuttifrutti.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -23,6 +25,9 @@ public class UserService {
 
     @Autowired
     private RecipeRepository recipeRepository;
+
+    @Autowired
+    private BCryptPasswordEncoder bCryptPasswordEncoder;
 
     public User getUser(long user_id) {
         Optional<User> user = this.userRepository.findById(user_id);
@@ -107,8 +112,9 @@ public class UserService {
     public void registration(UserDTO userDTO) {
         User newUser = User.builder()
                 .username(userDTO.getUsername())
-                .password(userDTO.getPassword())
-                .registrationDate(userDTO.getRegistrationDate())
+                .password(this.bCryptPasswordEncoder.encode(userDTO.getPassword()))
+//                .registrationDate(userDTO.getRegistrationDate())
+                .registrationDate(LocalDate.now())
                 .build();
         this.userRepository.save(newUser);
     }
