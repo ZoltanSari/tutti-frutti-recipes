@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import {RecipeService} from "../../services/recipe.service";
+import { AuthService } from '../../services/auth.service';
+import { RecipeService } from '../../services/recipe.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-header',
@@ -8,13 +10,20 @@ import {RecipeService} from "../../services/recipe.service";
 })
 export class HeaderComponent implements OnInit {
 
-  constructor(private recipeSevice: RecipeService) { }
+  constructor(private authService: AuthService,
+              private recipeService: RecipeService,
+              private router: Router) { }
 
   ngOnInit() {
   }
 
-  test() {
-    this.recipeSevice.sendmessage('oli');
+  onLogout() {
+    this.authService.logOutUser();
   }
 
+  onEnter(value: string){
+    this.recipeService.getSearchRecipe(value);
+    this.router.navigate(['search']);
+
+  }
 }

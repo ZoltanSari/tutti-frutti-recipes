@@ -6,7 +6,7 @@ import { HeaderComponent } from './components/header/header.component';
 import { RecipeComponent } from './components/recipe/recipe.component';
 import { UserComponent } from './components/user/user.component';
 import { SearchComponent } from './components/search/search.component';
-import { LoginComponent } from './components/login/login.component';
+import { LoginComponent } from './components/auth/login/login.component';
 import { UserRecipeListComponent } from './components/user/user-recipe-list/user-recipe-list.component';
 import { UserFavouriteRecipeComponent } from './components/user/user-favourite-recipe/user-favourite-recipe.component';
 import { RecipeListComponent } from './components/recipe/recipe-list/recipe-list.component';
@@ -16,6 +16,12 @@ import { AddNewRecipeComponent } from './components/recipe/new-recipe/add-new-re
 import { AppRoutingModule } from './app-routing.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
+import { RegisterComponent } from './components/auth/register/register.component';
+import { AuthService } from './services/auth.service';
+import { UserService } from './services/user.service';
+import { RecipeService } from './services/recipe.service';
+import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
+import { ErrorPageComponent } from './error-page/error-page.component';
 
 @NgModule({
   declarations: [
@@ -31,6 +37,9 @@ import { HttpClientModule } from '@angular/common/http';
     RecipeItemComponent,
     RecipeDetailsComponent,
     AddNewRecipeComponent,
+    RegisterComponent,
+    PageNotFoundComponent,
+    ErrorPageComponent
   ],
   imports: [
     BrowserModule,
@@ -39,7 +48,7 @@ import { HttpClientModule } from '@angular/common/http';
     FormsModule,
     HttpClientModule
   ],
-  providers: [],
+  providers: [RecipeService, AuthService, UserService],
   bootstrap: [AppComponent]
 })
 export class AppModule {

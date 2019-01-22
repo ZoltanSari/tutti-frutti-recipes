@@ -2,8 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {Recipe} from "../../../model/recipe.model";
 import {RecipeService} from "../../../services/recipe.service";
 import { Router } from '@angular/router';
-import { User } from '../../../model/user.model';
-import { UserService } from '../../../services/user.service';
+import { AuthService } from '../../../services/auth.service';
 
 @Component({
   selector: 'app-recipe-list',
@@ -13,20 +12,24 @@ import { UserService } from '../../../services/user.service';
 export class RecipeListComponent implements OnInit {
 
   recipes: Recipe[];
-  user: User;
+  searchResultRecipes: Recipe[];
+
 
   constructor(private recipeService: RecipeService,
               private router: Router,
-              private userService: UserService) {}
+              private authService: AuthService) {}
 
   ngOnInit() {
-    this.recipeService.getRecipes().subscribe(
+    this.recipeService.getTop5RecipeMostLikeRecipes().subscribe(
       (recipes: Recipe[]) => {
         this.recipes = recipes;
       }
     );
-    this.user = this.userService.user;
+    this.recipeService.searchResultRecipe.subscribe(
+      recipes => this.searchResultRecipes = recipes
+    )
   }
+
 
   onNewRecipe() {
     this.router.navigate(['user', 'new']);

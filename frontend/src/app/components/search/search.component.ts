@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { RecipeService } from '../../services/recipe.service';
 import { Recipe } from '../../model/recipe.model';
+import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'app-search',
@@ -8,20 +9,16 @@ import { Recipe } from '../../model/recipe.model';
   styleUrls: ['./search.component.css']
 })
 export class SearchComponent implements OnInit {
-  recipes: Recipe[];
 
-  constructor(private recipeService: RecipeService) { }
+  searchRecipe: Recipe[];
+
+  constructor(private recipeService: RecipeService,
+              private authService: AuthService) { }
 
   ngOnInit() {
-  }
 
-
-  onEnter(value: string) {
-    this.recipeService.getSearchRecipe(value).subscribe(
-      (recipes: Recipe[])=> {
-        this.recipes = recipes;
-        console.log(recipes);
-      }
-    );
+    this.recipeService.searchResultRecipe.subscribe(
+      recipe => this.searchRecipe = recipe
+    )
   }
 }

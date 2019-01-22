@@ -1,3 +1,30 @@
-<p>
-  user-favourite-recipe works!
-</p>
+<div *ngIf="userFavourites.length == 0">
+  <h3>You do not have any recipe yet</h3>
+</div>
+<div *ngIf="userFavourites.length != 0">
+  <div class="row" *ngFor="let recipe of userFavourites">
+    <div class="col-xs-6" >
+      <img [src]="recipe.imageUrl" class="img-responsive" style="max-height: 400px; max-width: 500px">
+      <h3>How to make</h3>
+      {{ recipe.preparation }}
+    </div>
+    <div class="col-xs-6">
+      <div class="text-center">
+        <h1 [innerHTML]="recipe.name"></h1>
+        <button (click)="onDelete(user.id, recipe.id)" class="btn btn-danger">X</button>
+      </div>
+      <div class="row">
+        <div class="col-xs-12">
+          <h3>Ingredients:</h3>
+          <ul class="list-group">
+            <li class="list-group-item"
+                *ngFor="let ingredient of recipe.ingredients">
+              {{ ingredient.amount }} {{ ingredient.unit }} {{ ingredient.name }}
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+

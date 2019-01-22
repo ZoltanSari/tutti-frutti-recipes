@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { UserService } from '../../../services/user.service';
 
 @Component({
   selector: 'app-user-recipe-list',
@@ -6,10 +7,14 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./user-recipe-list.component.css']
 })
 export class UserRecipeListComponent implements OnInit {
+  userRecipes = this.userService.user.recipes;
 
-  constructor() { }
+  constructor(private userService: UserService) {}
 
   ngOnInit() {
   }
 
+  onDelete(userId: number, recipeId: number) {
+    this.userService.deleteUsersRecipe(userId, recipeId);
+  }
 }
