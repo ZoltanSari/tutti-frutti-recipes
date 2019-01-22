@@ -1,5 +1,4 @@
-<li>
-  <form action="">
-    <input #search type="text" (keyup.enter)="onEnter(search.value)">
-  </form>
-</li>
+<app-recipe-item *ngFor="let recipe of searchRecipe;"
+                 [recipe]="recipe"
+                 [id]="recipe.id"
+                 [isUser]="authService.isUser"></app-recipe-item>
