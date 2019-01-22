@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { RecipeService } from '../../services/recipe.service';
 import { Recipe } from '../../model/recipe.model';
 import { AuthService } from '../../services/auth.service';
@@ -10,11 +12,13 @@ import { AuthService } from '../../services/auth.service';
 })
 export class SearchComponent implements OnInit {
 
+  @ViewChild('dropdown') dropdownElement: ElementRef;
   searchRecipe: Recipe[];
   isLoggedIn: boolean;
 
   constructor(private recipeService: RecipeService,
-              private authService: AuthService) { }
+              private authService: AuthService,
+              private router: Router) { }
 
   ngOnInit() {
 
@@ -25,4 +29,14 @@ export class SearchComponent implements OnInit {
       isLoggedIn => this.isLoggedIn = isLoggedIn
     )
   }
+
+  onEnter(value: string) {
+    this.recipeService.getSearchRecipe(value);
+    this.router.navigate(['search']);
+  }
+
+  onDropdownMenu() {
+    (<HTMLElement>this.dropdownElement.nativeElement).classList.toggle('d-block');
+  }
+
 }
