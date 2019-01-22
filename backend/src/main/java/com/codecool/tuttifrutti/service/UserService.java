@@ -29,15 +29,13 @@ public class UserService {
     @Autowired
     private BCryptPasswordEncoder bCryptPasswordEncoder;
 
-    public User getUser(long user_id) {
-        Optional<User> user = this.userRepository.findById(user_id);
-        return user.equals(Optional.empty()) ? null : user.get();
+    public User getUser(String username) {
+        return this.userRepository.findByUsername(username);
     }
 
-    public void likeRecipe(long user_id, long recipe_id) {
-        Optional<User> userOptional = this.userRepository.findById(user_id);
-        if (userOptional.isPresent()) {
-            User user = userOptional.get();
+    public void likeRecipe(String username, long recipe_id) {
+        User user = this.userRepository.findByUsername(username);
+        if (user != null) {
             Optional<Recipe> recipe = this.recipeRepository.findById(recipe_id);
             if (recipe.isPresent() && user.getLikedRecipes().contains(recipe.get())) {
                 user.removeLikedRecipe(recipe.get());
@@ -48,10 +46,9 @@ public class UserService {
         }
     }
 
-    public void addUsersRecipe(long user_id, RecipeDTO recipeDTO) {
-        Optional<User> user = this.userRepository.findById(user_id);
-        if (user.isPresent()) {
-            User userObject = user.get();
+    public void addUsersRecipe(String username, RecipeDTO recipeDTO) {
+        User user = this.userRepository.findByUsername(username);
+        if (user!= null) {
             Recipe newRecipe = Recipe.builder()
                     .name(recipeDTO.getName())
                     .preparation(recipeDTO.getPreparation())
@@ -63,7 +60,7 @@ public class UserService {
                                     ingredientDTO.getAmount(),
                                     ingredientDTO.getUnit()))
                             .collect(Collectors.toList()))
-                    .user(userObject)
+                    .user(user)
                     .build();
 
             List<Ingredient> newIngredients = new ArrayList<>();
@@ -75,34 +72,38 @@ public class UserService {
                                     newRecipe)));
             newRecipe.setIngredients(newIngredients);
 
-            userObject.getRecipes().add(newRecipe);
-            newRecipe.setUser(userObject);
+            user.getRecipes().add(newRecipe);
+            newRecipe.setUser(user);
 //            userObject.addNewRecipe(recipeDTO);
 //            this.recipeRepository.save(newRecipe);
-            this.userRepository.save(userObject);
+            this.userRepository.save(user);
         }
     }
 
-    public void editUsersRecipe(long user_id, long recipe_id, Recipe recipe) {
-        Optional<User> user = this.userRepository.findById(user_id);
-        if (user.isPresent()) {
-            User userObject = user.get();
-            Recipe oldRecipe = userObject.getRecipes().stream()
+    public void editUsersRecipe(String username, long recipe_id, Recipe recipe) {
+        User user = this.userRepository.findByUsername(username);
+        if (user != null) {
+            Recipe oldRecipe = user.getRecipes().stream()
                     .filter(currentRecipe -> currentRecipe.getId() == recipe_id)
                     .findFirst().get();
             oldRecipe = recipe;
-            oldRecipe.setUser(userObject);
+            oldRecipe.setUser(user);
             this.recipeRepository.save(recipe);
 //            this.userRepository.save(userObject);
         }
     }
 
-    public void deleteUsersRecipe(long user_id, long recipe_id) {
-        Optional<User> userOptional = this.userRepository.findById(user_id);
-        if (userOptional.isPresent()) {
-//            User user = userOptional.get();
-//            user.getRecipes().forEach(user::removeRecipe);
-//            this.userRepository.save(user);
+    public void deleteUsersRecipe(String username, long recipe_id) {
+        User user = this.userRepository.findByUsername(username);
+        ArrayList<Recipe> recipes = new ArrayList<Recipe>();
+        if (user != null) {
+            for (Recipe recipe : user.getRecipes()) {
+                if (recipe.getId() == recipe_id) {
+                    recipes.add(recipe);
+                }
+            }
+            user.getRecipes().remove(recipes.get(0));
+            this.userRepository.save(user);
 
             Optional<Recipe> recipe = this.recipeRepository.findById(recipe_id);
             recipe.ifPresent(recipe1 -> this.recipeRepository.delete(recipe1));
@@ -126,5 +127,4 @@ public class UserService {
 
         return null;
     }
-
 }
