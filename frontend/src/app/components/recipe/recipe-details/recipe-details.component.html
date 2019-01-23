@@ -1,6 +1,9 @@
 <div class="row" *ngIf="recipe">
-  <div class="col-9 text-center">
+  <div class="col-9 d-flex justify-content-center">
     <h1>{{ recipe.name }}</h1>
+    <label *ngIf="isLoggedIn">
+      <button class="btn btn-primary m-2">Edit</button>
+    </label>
   </div>
 </div>
 <div class="row" *ngIf="recipe">

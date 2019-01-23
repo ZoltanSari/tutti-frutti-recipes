@@ -3,6 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 
 import { Recipe } from '../../../model/recipe.model';
 import { RecipeService } from '../../../services/recipe.service';
+import { AuthService } from '../../../services/auth.service';
 
 @Component({
   selector: 'app-recipe-details',
@@ -11,12 +12,13 @@ import { RecipeService } from '../../../services/recipe.service';
 })
 export class RecipeDetailsComponent implements OnInit {
 
+  isLoggedIn: boolean;
   id: number;
   recipe: Recipe;
 
   constructor(private recipeService: RecipeService,
-              private route: ActivatedRoute) {
-  }
+              private route: ActivatedRoute,
+              private authService: AuthService) { }
 
   ngOnInit() {
     this.id = this.route.snapshot.params['id'];
@@ -24,6 +26,10 @@ export class RecipeDetailsComponent implements OnInit {
       (recipe: Recipe) => {
         this.recipe = recipe;
       }
+    );
+    this.isLoggedIn = this.authService.loggedIn();
+    this.authService.isLoggedIn.subscribe(
+      status => this.isLoggedIn = status
     );
   }
 

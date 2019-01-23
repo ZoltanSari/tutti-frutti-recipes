@@ -20,6 +20,7 @@ export class AuthService {
   }
 
   logOutUser() {
+    sessionStorage.removeItem('token');
     this.isLoggedIn.next(false);
   }
 

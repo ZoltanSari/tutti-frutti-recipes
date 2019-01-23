@@ -1,8 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { Router } from '@angular/router';
 
 import { UserService } from '../../../services/user.service';
 import { AuthService } from '../../../services/auth.service';
-import { Recipe } from '../../../model/recipe.model';
+import { User } from '../../../model/user.model';
+import { RecipeService } from '../../../services/recipe.service';
 
 @Component({
   selector: 'app-user-recipe-list',
@@ -11,19 +13,31 @@ import { Recipe } from '../../../model/recipe.model';
 })
 export class UserRecipeListComponent implements OnInit {
 
-  userRecipes: Recipe[];
+  @ViewChild('dropdown') dropdownElement: ElementRef;
+  user: User;
 
   constructor(private userService: UserService,
-              private authService: AuthService) {}
+              private authService: AuthService,
+              private recipeService: RecipeService,
+              private router: Router) {}
 
   ngOnInit() {
     this.userService.getUser(this.authService.getUsername()).subscribe(
-      user => this.userRecipes = user.recipes
+      user => this.user = user
     )
   }
 
   onDelete(username: string, recipeId: number) {
     this.userService.deleteUsersRecipe(username, recipeId);
+  }
+
+  onEnter(value: string) {
+    this.recipeService.getSearchRecipe(value);
+    this.router.navigate(['search']);
+  }
+
+  onDropdownMenu() {
+    (<HTMLElement>this.dropdownElement.nativeElement).classList.toggle('d-block');
   }
 
 }
