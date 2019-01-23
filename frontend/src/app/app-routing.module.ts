@@ -17,11 +17,11 @@ const routes: Routes = [
   { path: 'login', component: AuthComponent },
   { path: 'registration', component: AuthComponent },
   { path: 'user', component: UserComponent, canActivate: [AuthGuard] },
-  { path: 'user/new', component: AddNewRecipeComponent, canActivate: [AuthGuard] },
-  { path: 'user-recipe', component: UserRecipeListComponent, canActivate: [AuthGuard] },
-  { path: 'user-favourite', component: UserFavouriteRecipeComponent, canActivate: [AuthGuard] },
   { path: 'search', component: SearchComponent },
   { path: 'not-found', component: ErrorPageComponent, data: {message: 'Page not found!'} },
+  { path: ':user/favourite', component: UserFavouriteRecipeComponent, canActivate: [AuthGuard] },
+  { path: ':user/recipe', component: UserRecipeListComponent, canActivate: [AuthGuard] },
+  { path: ':user/new', component: AddNewRecipeComponent, canActivate: [AuthGuard] },
   { path: ':id', component: RecipeDetailsComponent },
   { path: '**', redirectTo: '/not-found' }
 ];

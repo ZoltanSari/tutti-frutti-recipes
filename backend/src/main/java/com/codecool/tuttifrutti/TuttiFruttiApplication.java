@@ -123,6 +123,7 @@ public class TuttiFruttiApplication {
         recipe6.setIngredients(newIngredients6);
 
         user1.addNewRecipe(recipe1);
+        user1.addLikedRecipe(recipe1);
         user1.addNewRecipe(recipe2);
         user1.addNewRecipe(recipe3);
         user2.addNewRecipe(recipe4);

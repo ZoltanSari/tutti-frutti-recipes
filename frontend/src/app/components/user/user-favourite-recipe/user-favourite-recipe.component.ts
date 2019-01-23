@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { UserService } from '../../../services/user.service';
 import { Recipe } from '../../../model/recipe.model';
+import { User } from '../../../model/user.model';
+import { AuthService } from '../../../services/auth.service';
 
 @Component({
   selector: 'app-user-favourite-recipe',
@@ -8,12 +10,17 @@ import { Recipe } from '../../../model/recipe.model';
   styleUrls: ['./user-favourite-recipe.component.css']
 })
 export class UserFavouriteRecipeComponent implements OnInit {
-  userFavourites: Recipe[];
+  user: User;
 
-  constructor(private userService: UserService) {}
+  constructor(private userService: UserService,
+              private authService: AuthService) {}
 
   ngOnInit() {
-    this.userFavourites = this.userService.user.likedRecipes;
+    this.userService.getUser(this.authService.getUsername()).subscribe(
+      user => {
+        this.user = user;
+      }
+    )
   }
 
   onDelete(username: string, recipeId: number) {
