@@ -30,7 +30,7 @@ export class UserService {
       (response: HttpResponse<any>) => {
         if (response.headers.get('Authorization')) {
           this.authService.saveToken(response.headers.get('Authorization'));
-          this.checkIsUserValid();
+          // this.checkIsUserValid();
         }
       }
     );
@@ -52,7 +52,7 @@ export class UserService {
   }
 
   checkIsUserValid(){
-    if (!this.authService.isLogin()) {
+    if (this.authService.loggedIn()) {
       this.authService.isLoggedIn.next(true);
       this.router.navigate(['/']);
     } else  {

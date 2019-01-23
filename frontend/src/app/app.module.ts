@@ -1,6 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
+import { NgModule } from '@angular/core';
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './components/header/header.component';
 import { RecipeComponent } from './components/recipe/recipe.component';
@@ -14,7 +15,6 @@ import { RecipeItemComponent } from './components/recipe/recipe-list/recipe-item
 import { RecipeDetailsComponent } from './components/recipe/recipe-details/recipe-details.component';
 import { AddNewRecipeComponent } from './components/recipe/new-recipe/add-new-recipe.component';
 import { AppRoutingModule } from './app-routing.module';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { RegisterComponent } from './components/auth/register/register.component';
 import { AuthService } from './services/auth.service';

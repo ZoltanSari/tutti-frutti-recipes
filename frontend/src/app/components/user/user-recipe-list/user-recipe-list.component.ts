@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+
 import { UserService } from '../../../services/user.service';
+import { AuthService } from '../../../services/auth.service';
+import { Recipe } from '../../../model/recipe.model';
 
 @Component({
   selector: 'app-user-recipe-list',
@@ -7,14 +10,20 @@ import { UserService } from '../../../services/user.service';
   styleUrls: ['./user-recipe-list.component.css']
 })
 export class UserRecipeListComponent implements OnInit {
-  userRecipes = this.userService.user.recipes;
 
-  constructor(private userService: UserService) {}
+  userRecipes: Recipe[];
+
+  constructor(private userService: UserService,
+              private authService: AuthService) {}
 
   ngOnInit() {
+    this.userService.getUser(this.authService.getUsername()).subscribe(
+      user => this.userRecipes = user.recipes
+    )
   }
 
   onDelete(username: string, recipeId: number) {
     this.userService.deleteUsersRecipe(username, recipeId);
   }
+
 }

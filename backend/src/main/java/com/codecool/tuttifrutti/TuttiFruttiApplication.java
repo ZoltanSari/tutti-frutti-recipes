@@ -32,9 +32,17 @@ public class TuttiFruttiApplication {
 
     @PostConstruct
     public void loadDatabase() {
-        User user1 = new User("Oli", "asd", LocalDate.now(), new ArrayList<>(), new ArrayList<>());
+        User user1 = new User("Oli",
+                this.bCryptPasswordEncoder().encode("asd"),
+                LocalDate.now(),
+                new ArrayList<>(),
+                new ArrayList<>());
 
-        User user2 = new User("Zoli", "456", LocalDate.now(), new ArrayList<>(), new ArrayList<>());
+        User user2 = new User("Zoli",
+                this.bCryptPasswordEncoder().encode("456"),
+                LocalDate.now(),
+                new ArrayList<>(),
+                new ArrayList<>());
 
         Recipe recipe1 = Recipe.builder()
                 .name("Pizza")
@@ -72,7 +80,7 @@ public class TuttiFruttiApplication {
 
         List<Ingredient> newIngredients3 = new ArrayList<>();
         newIngredients3.add(new Ingredient("Chicken", 2, "kg", recipe3));
-        newIngredients3.add(new Ingredient("Greens", 5, "kg", recipe3));
+        newIngredients3.add(new Ingredient("Potato", 5, "kg", recipe3));
         recipe3.setIngredients(newIngredients3);
 
         Recipe recipe4 = Recipe.builder()
@@ -85,7 +93,7 @@ public class TuttiFruttiApplication {
 
         List<Ingredient> newIngredients4 = new ArrayList<>();
         newIngredients4.add(new Ingredient("Chicken", 2, "kg", recipe4));
-        newIngredients4.add(new Ingredient("Greens", 5, "kg", recipe4));
+        newIngredients4.add(new Ingredient("Rice", 5, "kg", recipe4));
         recipe4.setIngredients(newIngredients4);
 
         Recipe recipe5 = Recipe.builder()
@@ -97,7 +105,7 @@ public class TuttiFruttiApplication {
                 .build();
 
         List<Ingredient> newIngredients5 = new ArrayList<>();
-        newIngredients5.add(new Ingredient("Chicken", 2, "kg", recipe5));
+        newIngredients5.add(new Ingredient("Beef", 2, "kg", recipe5));
         newIngredients5.add(new Ingredient("Greens", 5, "kg", recipe5));
         recipe5.setIngredients(newIngredients5);
 
@@ -111,7 +119,7 @@ public class TuttiFruttiApplication {
 
         List<Ingredient> newIngredients6 = new ArrayList<>();
         newIngredients6.add(new Ingredient("Chicken", 2, "kg", recipe6));
-        newIngredients6.add(new Ingredient("Greens", 5, "kg", recipe6));
+        newIngredients6.add(new Ingredient("Beans", 5, "kg", recipe6));
         recipe6.setIngredients(newIngredients6);
 
         user1.addNewRecipe(recipe1);
