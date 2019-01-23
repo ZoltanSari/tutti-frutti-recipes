@@ -1,26 +1,30 @@
 import { Injectable } from '@angular/core';
 
 import { Subject } from 'rxjs';
-import { Router } from '@angular/router';
-
+import * as jwt_decode from 'jwt-decode';
 
 @Injectable()
 export class AuthService {
 
   isLoggedIn = new Subject<boolean>();
-  isUser = false;
 
-  constructor(private router: Router) {}
+  constructor() {}
 
   saveToken(token: string) {
     sessionStorage.setItem('token', token.substring(7));
+    this.isLoggedIn.next(true);
   }
 
-  isLogin() {
-    return sessionStorage.getItem('token') === null;
+  loggedIn() {
+    return sessionStorage.getItem('token');
   }
 
   logOutUser() {
     this.isLoggedIn.next(false);
   }
+
+  getUsername() {
+    return this.loggedIn() ? jwt_decode(sessionStorage.getItem('token'))['sub'] : null;
+  }
+
 }

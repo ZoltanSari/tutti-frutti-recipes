@@ -4,8 +4,8 @@
       <div class="dropdown">
         <button class="btn btn-primary mt-3" (click)="onDropdownMenu()">Menu</button>
         <ul class="dropdown-menu" #dropdown>
-          <a class="dropdown-item">My Recipes</a>
-          <a class="dropdown-item">My Favourites</a>
+          <a class="dropdown-item" routerLink="/user-favourite">My Favourites</a>
+          <a class="dropdown-item" routerLink="/user-recipe">My Recipes</a>
           <a class="dropdown-item" routerLink="/add-recipe">Add Recipe</a>
         </ul>
       </div>
