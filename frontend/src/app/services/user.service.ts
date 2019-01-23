@@ -20,7 +20,7 @@ export class UserService {
     imageUrl: string;
     difficulty: string;
     ingredients: Ingredient[] }) {
-    this.http.post<any>(`${this.baseUsersUrl}/${this.user.id}/add-recipe`, recipeDTO).subscribe();
+    this.http.post<any>(`${this.baseUsersUrl}/${this.user.username}/add-recipe`, recipeDTO).subscribe();
   }
 
   login(username: string, password: string) {
@@ -41,7 +41,7 @@ export class UserService {
     }
 
   addLike(recipeId: number) {
-    this.http.put<any>(`${this.baseUsersUrl}/${this.user.id}/liked-recipes/recipes/${recipeId}`, null)
+    this.http.put<any>(`${this.baseUsersUrl}/${this.user.username}/liked-recipes/recipes/${recipeId}`, null)
       .subscribe();
   }
 

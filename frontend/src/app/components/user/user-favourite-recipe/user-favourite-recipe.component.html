@@ -1,8 +1,8 @@
-<div *ngIf="userFavourites.length == 0">
+<div *ngIf="!user">
   <h3>You do not have any recipe yet</h3>
 </div>
-<div *ngIf="userFavourites.length != 0">
-  <div class="row" *ngFor="let recipe of userFavourites">
+<div *ngIf="user && user.likedRecipes">
+  <div class="row" *ngFor="let recipe of user.likedRecipes">
     <div class="col-xs-6" >
       <img [src]="recipe.imageUrl" class="img-responsive" style="max-height: 400px; max-width: 500px">
       <h3>How to make</h3>
@@ -11,7 +11,7 @@
     <div class="col-xs-6">
       <div class="text-center">
         <h1 [innerHTML]="recipe.name"></h1>
-        <button (click)="onDelete(user.name, recipe.id)" class="btn btn-danger">X</button>
+        <button (click)="onDelete(user.username, recipe.id)" class="btn btn-danger">X</button>
       </div>
       <div class="row">
         <div class="col-xs-12">

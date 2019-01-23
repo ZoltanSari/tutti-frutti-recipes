@@ -4,6 +4,8 @@ import { Router } from '@angular/router';
 import { Recipe } from "../../../model/recipe.model";
 import { RecipeService } from "../../../services/recipe.service";
 import { AuthService } from '../../../services/auth.service';
+import { User } from '../../../model/user.model';
+import { UserService } from '../../../services/user.service';
 
 @Component({
   selector: 'app-recipe-list',
@@ -16,11 +18,13 @@ export class RecipeListComponent implements OnInit {
   recipes: Recipe[];
   searchResultRecipes: Recipe[];
   isLoggedIn: boolean;
+  user: User;
 
 
   constructor(private recipeService: RecipeService,
               private router: Router,
-              private authService: AuthService) {}
+              private authService: AuthService,
+              private userService: UserService) {}
 
   ngOnInit() {
     this.recipeService.getTop5RecipeMostLikeRecipes().subscribe(
@@ -30,11 +34,17 @@ export class RecipeListComponent implements OnInit {
     );
     this.recipeService.searchResultRecipe.subscribe(
       recipes => this.searchResultRecipes = recipes
-    )
+    );
     this.authService.isLoggedIn.subscribe(
       isLoggedIn => {this.isLoggedIn = isLoggedIn}
-    )
-  }
+    );
+    this.userService.getUser(this.authService.getUsername()).subscribe(
+      (user: User) => {
+        this.user = user;
+        console.log(user)
+      }
+    )}
+
 
 
   onNewRecipe() {
