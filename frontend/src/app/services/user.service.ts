@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Ingredient } from '../model/ingredient.model';
-import { HttpClient, HttpResponse } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse, HttpResponse } from '@angular/common/http';
 import { Recipe } from '../model/recipe.model';
 import { User } from '../model/user.model';
 import { AuthService } from './auth.service';
@@ -30,8 +30,12 @@ export class UserService {
       (response: HttpResponse<any>) => {
         if (response.headers.get('Authorization')) {
           this.authService.saveToken(response.headers.get('Authorization'));
-          // this.checkIsUserValid();
+          this.router.navigate(['/']);
         }
+      },
+      (response: HttpErrorResponse) => {
+        alert('invalid username or password!');
+        this.router.navigate(['login']);
       }
     );
     }
@@ -49,15 +53,6 @@ export class UserService {
     this.http.post<any>(`${this.baseUsersUrl}/registration`, userDTO).subscribe();
     this.router.navigate(['login']);
 
-  }
-
-  checkIsUserValid(){
-    if (this.authService.loggedIn()) {
-      this.authService.isLoggedIn.next(true);
-      this.router.navigate(['/']);
-    } else  {
-      alert("invalid username or password");
-    }
   }
 
   editUsersRecipe(username: string, recipeId: number, recipe: Recipe) {

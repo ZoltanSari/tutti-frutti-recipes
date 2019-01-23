@@ -15,7 +15,7 @@ import { RecipeItemComponent } from './components/recipe/recipe-list/recipe-item
 import { RecipeDetailsComponent } from './components/recipe/recipe-details/recipe-details.component';
 import { AddNewRecipeComponent } from './components/recipe/new-recipe/add-new-recipe.component';
 import { AppRoutingModule } from './app-routing.module';
-import { HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { RegisterComponent } from './components/auth/register/register.component';
 import { AuthService } from './services/auth.service';
 import { UserService } from './services/user.service';
@@ -23,6 +23,7 @@ import { RecipeService } from './services/recipe.service';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { ErrorPageComponent } from './error-page/error-page.component';
 import { AuthComponent } from './components/auth/auth.component';
+import { AuthInterceptor } from './interceptors/auth-interceptor';
 
 @NgModule({
   declarations: [
@@ -50,7 +51,7 @@ import { AuthComponent } from './components/auth/auth.component';
     FormsModule,
     HttpClientModule
   ],
-  providers: [RecipeService, AuthService, UserService],
+  providers: [RecipeService, AuthService, UserService, {provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true}],
   bootstrap: [AppComponent]
 })
 export class AppModule {

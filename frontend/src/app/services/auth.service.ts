@@ -15,8 +15,8 @@ export class AuthService {
     this.isLoggedIn.next(true);
   }
 
-  loggedIn() {
-    return sessionStorage.getItem('token');
+  loggedIn(): boolean {
+    return sessionStorage.getItem('token') !== null;
   }
 
   logOutUser() {
