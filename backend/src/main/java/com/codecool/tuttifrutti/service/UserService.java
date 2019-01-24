@@ -2,6 +2,7 @@ package com.codecool.tuttifrutti.service;
 
 import com.codecool.tuttifrutti.dto.RecipeDTO;
 import com.codecool.tuttifrutti.dto.UserDTO;
+import com.codecool.tuttifrutti.model.Category;
 import com.codecool.tuttifrutti.model.Ingredient;
 import com.codecool.tuttifrutti.model.Recipe;
 import com.codecool.tuttifrutti.model.User;
@@ -60,6 +61,9 @@ public class UserService {
                                     ingredientDTO.getAmount(),
                                     ingredientDTO.getUnit()))
                             .collect(Collectors.toList()))
+                    .categories((List<Category>) recipeDTO.getCategories())
+                    .creationDate(LocalDate.now())
+                    .preparationTime(recipeDTO.getPreparationTime())
                     .user(user)
                     .build();
 

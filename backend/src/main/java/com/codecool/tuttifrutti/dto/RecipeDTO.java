@@ -4,7 +4,9 @@ import com.codecool.tuttifrutti.model.Category;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.apache.tomcat.jni.Local;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Collection;
 
@@ -18,6 +20,8 @@ public class RecipeDTO {
     private String imageUrl;
     private String difficulty;
     private Collection<IngredientDTO> ingredients = new ArrayList<>();
+    private int preparationTime;
+    private LocalDate creationDate;
     private Collection<Category> categories = new ArrayList<>();
 
 }
