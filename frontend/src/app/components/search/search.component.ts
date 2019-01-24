@@ -24,7 +24,7 @@ export class SearchComponent implements OnInit {
 
     this.recipeService.searchResultRecipe.subscribe(
       recipe => this.searchRecipe = recipe
-    )
+    );
     this.authService.isLoggedIn.subscribe(
       isLoggedIn => this.isLoggedIn = isLoggedIn
     )
