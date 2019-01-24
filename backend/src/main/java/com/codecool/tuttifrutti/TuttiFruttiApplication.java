@@ -50,6 +50,7 @@ public class TuttiFruttiApplication {
                 .difficulty("HARD")
                 .imageUrl("https://scontent-atl3-1.cdninstagram.com/vp/6554e58d71ac7609b8accf718206896e/5CB6CE96/t51.2885-15/e35/46985992_154096345561626_8824904335492512941_n.jpg?_nc_ht=scontent-atl3-1.cdninstagram.com")
                 .preparation("it is very difficult")
+                .preparationTime(40)
                 .creationDate(LocalDate.now())
                 .user(user1)
                 .build();
@@ -70,6 +71,8 @@ public class TuttiFruttiApplication {
                 .difficulty("EASY")
                 .imageUrl("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ9DXy_GcEBvK6nPlQefXcqDOWxOHzBY_HvC5UXdnw1gtHYV-mp")
                 .preparation("it is so easy")
+                .preparationTime(40)
+                .creationDate(LocalDate.now())
                 .user(user1)
                 .build();
 
@@ -89,6 +92,8 @@ public class TuttiFruttiApplication {
                 .difficulty("HARD")
                 .imageUrl("http://2.bp.blogspot.com/-Fbn90h16470/UieNcqeYHoI/AAAAAAAAAYQ/rSHQDsRCwSk/s1600/Photo(1).jpg")
                 .preparation("it is very difficult")
+                .preparationTime(40)
+                .creationDate(LocalDate.now())
                 .user(user1)
                 .build();
 
@@ -108,6 +113,8 @@ public class TuttiFruttiApplication {
                 .difficulty("HARD")
                 .imageUrl("https://youimg1.c-ctrip.com/target/100c0l000000cna4nCA10.jpg")
                 .preparation("it is very difficult")
+                .preparationTime(40)
+                .creationDate(LocalDate.now())
                 .user(user1)
                 .build();
 
@@ -127,6 +134,8 @@ public class TuttiFruttiApplication {
                 .difficulty("HARD")
                 .imageUrl("https://pgw.udn.com.tw/gw/photo.php?u=https://uc.udn.com.tw/photo/2018/05/11/99/4726606.jpg&x=0&y=0&sw=0&sh=0&sl=W&fw=1050&exp=3600&exp=3600")
                 .preparation("it is very difficult")
+                .preparationTime(40)
+                .creationDate(LocalDate.now())
                 .user(user1)
                 .build();
 
@@ -146,6 +155,8 @@ public class TuttiFruttiApplication {
                 .difficulty("HARD")
                 .imageUrl("https://hips.hearstapps.com/del.h-cdn.co/assets/18/11/2048x1024/landscape-1520957481-grilled-salmon-horizontal.jpg?resize=1200:*")
                 .preparation("it is very difficult")
+                .preparationTime(40)
+                .creationDate(LocalDate.now())
                 .user(user1)
                 .build();
 
