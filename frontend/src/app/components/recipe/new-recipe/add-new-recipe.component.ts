@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
+import { FormArray, FormControl, FormGroup, Validators } from '@angular/forms';
+
 import { Ingredient } from '../../../model/ingredient.model';
 import { RecipeService } from '../../../services/recipe.service';
 import { UserService } from '../../../services/user.service';
@@ -10,47 +11,59 @@ import { UserService } from '../../../services/user.service';
   styleUrls: ['./add-new-recipe.component.css'],
 })
 export class AddNewRecipeComponent implements OnInit {
+
   newRecipeForm: FormGroup;
-  recipeIngredients: FormGroup;
   ingredientsList: Ingredient[] = [];
-  newIngredients: Ingredient;
+  categories: string[];
+  selectedCategories: string[] = [];
 
   constructor(private recipeService: RecipeService,
               private userService: UserService) { }
 
   ngOnInit() {
     this.initForm();
+    this.recipeService.getRecipeCategories().subscribe(
+      (categories: string[]) => {
+        this.categories = categories;
+      }
+    );
   }
 
   private initForm() {
-    this.recipeIngredients = new FormGroup({
-        'name': new FormControl(null),
-        'amount': new FormControl(null),
-        'unit': new FormControl(null)
+    const recipeIngredients = new FormGroup({
+        'name': new FormControl(null, Validators.required),
+        'amount': new FormControl(null, Validators.required),
+        'unit': new FormControl(null, Validators.required)
       });
 
     this.newRecipeForm = new FormGroup({
-      'name': new FormControl(null),
-      'imagePath': new FormControl(null),
-      'description': new FormControl(null),
-      'difficulty': new FormControl(null),
-      'ingredients': this.recipeIngredients
+      'name': new FormControl(null, Validators.required),
+      'imagePath': new FormControl(null, Validators.required),
+      'categories': new FormArray([]),
+      'description': new FormControl(null, Validators.required),
+      'difficulty': new FormControl(null, Validators.required),
+      'ingredients': recipeIngredients
     })
   }
 
   onSubmit() {
-    this.newIngredients = new Ingredient(this.recipeIngredients.value['name'],
-      this.recipeIngredients.value['amount'],
-      this.recipeIngredients.value['unit'],);
-
     const newRecipe = {
       'name': this.newRecipeForm.value['name'],
-      'preparation': this.newRecipeForm.value['description'],
       'imageUrl': this.newRecipeForm.value['imagePath'],
+      'categories': this.selectedCategories,
+      'preparation': this.newRecipeForm.value['description'],
       'difficulty': this.newRecipeForm.value['difficulty'],
       'ingredients': this.ingredientsList};
 
     this.userService.addRecipe(newRecipe);
+  }
+
+  onAddCategory(category: string) {
+    this.selectedCategories.push(category);
+  }
+
+  onRemoveCategory(category: string) {
+    this.selectedCategories.splice(this.selectedCategories.indexOf(category), 1);
   }
 
   onAddIngredient() {
@@ -60,4 +73,5 @@ export class AddNewRecipeComponent implements OnInit {
         this.newRecipeForm.get('ingredients').get('unit').value)
     );
   }
+
 }
