@@ -1,5 +1,6 @@
 package com.codecool.tuttifrutti.controller;
 
+import com.codecool.tuttifrutti.model.Category;
 import com.codecool.tuttifrutti.model.Recipe;
 import com.codecool.tuttifrutti.service.RecipeService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,6 +34,11 @@ public class RecipeController {
     @GetMapping("/{id}")
     public Recipe getSingleRecipe(@PathVariable long id) {
         return this.recipeService.getSingleRecipe(id);
+    }
+
+    @GetMapping("/categories")
+    public List<Category> getCategories() {
+        return this.recipeService.getCategories();
     }
 
 }
