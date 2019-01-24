@@ -4,7 +4,6 @@ import com.codecool.tuttifrutti.model.Category;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.apache.tomcat.jni.Local;
 
 import java.time.LocalDate;
 import java.util.ArrayList;

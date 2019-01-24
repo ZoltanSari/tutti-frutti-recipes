@@ -1,10 +1,13 @@
 import { Injectable } from '@angular/core';
-import {Recipe} from "../model/recipe.model";
 import { HttpClient } from '@angular/common/http';
+
 import { Subject } from 'rxjs';
+
+import { Recipe } from "../model/recipe.model";
 
 @Injectable()
 export class RecipeService{
+
   baseRecipeUrl: string = "http://localhost:8080/recipes";
   searchResultRecipe = new Subject<Recipe[]>();
 
@@ -20,7 +23,6 @@ export class RecipeService{
 
   getAllRecipes() {
     return this.http.get<Recipe[]>(`${this.baseRecipeUrl}`);
-
   }
 
   getRecipeCategories() {
@@ -33,4 +35,5 @@ export class RecipeService{
         (recipes: Recipe[]) => this.searchResultRecipe.next(recipes)
       );
   }
+
 }
