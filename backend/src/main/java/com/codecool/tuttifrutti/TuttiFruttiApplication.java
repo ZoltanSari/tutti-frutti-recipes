@@ -1,5 +1,6 @@
 package com.codecool.tuttifrutti;
 
+import com.codecool.tuttifrutti.model.Category;
 import com.codecool.tuttifrutti.model.Ingredient;
 import com.codecool.tuttifrutti.model.Recipe;
 import com.codecool.tuttifrutti.model.User;
@@ -49,6 +50,7 @@ public class TuttiFruttiApplication {
                 .difficulty("HARD")
                 .imageUrl("https://scontent-atl3-1.cdninstagram.com/vp/6554e58d71ac7609b8accf718206896e/5CB6CE96/t51.2885-15/e35/46985992_154096345561626_8824904335492512941_n.jpg?_nc_ht=scontent-atl3-1.cdninstagram.com")
                 .preparation("it is very difficult")
+                .creationDate(LocalDate.now())
                 .user(user1)
                 .build();
 
@@ -56,6 +58,12 @@ public class TuttiFruttiApplication {
         newIngredients1.add(new Ingredient("Chicken", 2, "kg", recipe1));
         newIngredients1.add(new Ingredient("Greens", 5, "kg", recipe1));
         recipe1.setIngredients(newIngredients1);
+
+        List<Category> newCategories1 = new ArrayList<>();
+        newCategories1.add(Category.BEEF);
+        newCategories1.add(Category.LUNCH);
+        newCategories1.add(Category.DINNER);
+        recipe1.setCategories(newCategories1);
 
         Recipe recipe2 = Recipe.builder()
                 .name("Pancake")
@@ -70,6 +78,12 @@ public class TuttiFruttiApplication {
         newIngredients2.add(new Ingredient("Beef", 6, "pound", recipe2));
         recipe2.setIngredients(newIngredients2);
 
+        List<Category> newCategories2 = new ArrayList<>();
+        newCategories1.add(Category.BEEF);
+        newCategories1.add(Category.LUNCH);
+        newCategories1.add(Category.BREAKFAST);
+        recipe1.setCategories(newCategories2);
+
         Recipe recipe3 = Recipe.builder()
                 .name("FishPie")
                 .difficulty("HARD")
@@ -82,6 +96,12 @@ public class TuttiFruttiApplication {
         newIngredients3.add(new Ingredient("Chicken", 2, "kg", recipe3));
         newIngredients3.add(new Ingredient("Potato", 5, "kg", recipe3));
         recipe3.setIngredients(newIngredients3);
+
+        List<Category> newCategories3 = new ArrayList<>();
+        newCategories1.add(Category.VEGETABLE);
+        newCategories1.add(Category.LUNCH);
+        newCategories1.add(Category.FISH);
+        recipe1.setCategories(newCategories3);
 
         Recipe recipe4 = Recipe.builder()
                 .name("Chicken")
@@ -96,6 +116,12 @@ public class TuttiFruttiApplication {
         newIngredients4.add(new Ingredient("Rice", 5, "kg", recipe4));
         recipe4.setIngredients(newIngredients4);
 
+        List<Category> newCategories4 = new ArrayList<>();
+        newCategories1.add(Category.FISH);
+        newCategories1.add(Category.LUNCH);
+        newCategories1.add(Category.DINNER);
+        recipe1.setCategories(newCategories4);
+
         Recipe recipe5 = Recipe.builder()
                 .name("Gyoza")
                 .difficulty("HARD")
@@ -109,6 +135,12 @@ public class TuttiFruttiApplication {
         newIngredients5.add(new Ingredient("Greens", 5, "kg", recipe5));
         recipe5.setIngredients(newIngredients5);
 
+        List<Category> newCategories5 = new ArrayList<>();
+        newCategories1.add(Category.CHICKEN);
+        newCategories1.add(Category.BREAKFAST);
+        newCategories1.add(Category.DINNER);
+        recipe1.setCategories(newCategories5);
+
         Recipe recipe6 = Recipe.builder()
                 .name("Salmon")
                 .difficulty("HARD")
@@ -121,6 +153,12 @@ public class TuttiFruttiApplication {
         newIngredients6.add(new Ingredient("Chicken", 2, "kg", recipe6));
         newIngredients6.add(new Ingredient("Beans", 5, "kg", recipe6));
         recipe6.setIngredients(newIngredients6);
+
+        List<Category> newCategories6 = new ArrayList<>();
+        newCategories1.add(Category.PASTA);
+        newCategories1.add(Category.LUNCH);
+        newCategories1.add(Category.VEGETABLE);
+        recipe1.setCategories(newCategories6);
 
         user1.addNewRecipe(recipe1);
         user1.addLikedRecipe(recipe1);

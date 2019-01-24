@@ -9,10 +9,13 @@ export class Recipe {
   difficulty: string;
   totalLikes: number;
   ingredients: Ingredient[];
+  categories: string[];
+  preparationTime: number;
+  creationDate: Date;
   user: User;
 
 
-  constructor(id: number, name: string, preparation: string, imageUrl: string, difficulty: string, totalLikes: number, ingredients: Ingredient[], user: User) {
+  constructor(id: number, name: string, preparation: string, imageUrl: string, difficulty: string, totalLikes: number, ingredients: Ingredient[], categories: string[], preparationTime: number, creationDate: Date, user: User) {
     this.id = id;
     this.name = name;
     this.preparation = preparation;
@@ -20,6 +23,9 @@ export class Recipe {
     this.difficulty = difficulty;
     this.totalLikes = totalLikes;
     this.ingredients = ingredients;
+    this.categories = categories;
+    this.preparationTime = preparationTime;
+    this.creationDate = creationDate;
     this.user = user;
   }
 }

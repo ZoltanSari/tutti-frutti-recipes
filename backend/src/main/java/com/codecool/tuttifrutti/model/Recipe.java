@@ -8,8 +8,10 @@ import org.hibernate.annotations.LazyCollectionOption;
 import org.hibernate.annotations.Type;
 
 import javax.persistence.*;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 
 @Entity
 @Data
@@ -52,10 +54,27 @@ public class Recipe {
     @JsonBackReference
     private User user;
 
+    @Column(nullable = false, name = "creation_date")
+    private LocalDate creationDate;
+
+    @Column(nullable = false, name = "preparation_time")
+    private int preparationTime;
+
+    @Enumerated(EnumType.STRING)
+    @ElementCollection(targetClass = Category.class)
+    @LazyCollection(LazyCollectionOption.FALSE)
+    @Column(nullable = false)
+    @ToString.Exclude
+    private List<Category> categories = new ArrayList<>();
+
 
     public void addIngredient(Ingredient ingredient) {
         this.ingredients = new ArrayList<>(this.ingredients);
         this.ingredients.add(ingredient);
+    }
+
+    public void addCategory(Category category) {
+        this.categories.add(category);
     }
 
     public void increaseTotalLiked() {

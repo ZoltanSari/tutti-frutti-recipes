@@ -1,10 +1,12 @@
 package com.codecool.tuttifrutti.service;
 
+import com.codecool.tuttifrutti.model.Category;
 import com.codecool.tuttifrutti.model.Recipe;
 import com.codecool.tuttifrutti.repository.RecipeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
@@ -32,4 +34,7 @@ public class RecipeService {
         return recipe.equals(Optional.empty()) ? null : recipe.get();
     }
 
+    public List<Category> getCategories() {
+        return Arrays.asList(Category.values());
+    }
 }
